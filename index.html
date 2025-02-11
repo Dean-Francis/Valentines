@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-image: none; /* Initial background (none before Yes is clicked) */
+            background-size: cover;
+            background-position: center;
+            transition: background-image 1s ease-in-out;
+        }
+        h1 {
+            color: #d63384;
+        }
+        .container {
+            margin-top: 20px;
+            position: relative;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 8px;
+        }
+        .yes {
+            background-color: #ff4d79;
+            color: white;
+        }
+        .no {
+            background-color: #cccccc;
+            color: black;
+            position: absolute;
+            transition: all 0.3s ease-in-out;
+        }
+        .message {
+            display: none;
+            font-size: 32px;
+            font-weight: bold;
+            color: #d63384;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .counter {
+            font-size: 20px;
+            color: #555;
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+    <h1 id="question">Will you be my Valentine? :>❤️</h1>
+    <div class="container">
+        <button class="btn yes" onclick="showLove()">Yes! 💖</button>
+        <button class="btn no" onmouseover="moveButton()">No 😢</button>
+    </div>
+    <h1 class="message" id="loveMessage">Can't wait to spend our first valentines together!!!! 💕</h1>
+    <p class="counter" id="dayCounter"></p>
+
+    <script>
+        function showLove() {
+            document.getElementById("question").style.display = "none";
+            document.querySelector(".container").style.display = "none";
+            document.getElementById("loveMessage").style.display = "block";
+            document.getElementById("dayCounter").style.display = "block"; 
+            document.body.style.backgroundImage = "your-image.png"; 
+        }
+
+        function moveButton() {
+            const noButton = document.querySelector('.no');
+            const maxX = window.innerWidth - noButton.offsetWidth - 20; // Make sure it stays within the screen (subtract button width)
+            const maxY = window.innerHeight - noButton.offsetHeight - 20; // Make sure it stays within the screen (subtract button height)
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+            noButton.style.left = `${x}px`;
+            noButton.style.top = `${y}px`;
+        }
+
+        function updateDayCounter() {
+            const startDate = new Date('January 7, 2025'); // Change this to your actual anniversary date
+            const currentDate = new Date();
+            const timeDifference = currentDate - startDate;
+            const daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            document.getElementById("dayCounter").innerText = `${daysPassed} days since I made you mine ❤️`;
+        }
+
+        updateDayCounter();
+        setInterval(updateDayCounter, 1000 * 60 * 60 * 24); // Update every 24 hours
+    </script>
+</body>
+</html>
